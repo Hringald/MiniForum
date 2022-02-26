@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@using MiniForum.Models.Replies
+@model TopicsReplyViewModel
+@{
+    ViewData["Title"] = "Replies";
+}
+<h1>Topic</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Model.Name
+            </td>
+            <td>
+                @Model.Description
+            </td>
+        </tr>
+
+
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        UserName
+                    </th>
+                    <th>
+                        Reply
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <h2>Replies</h2>
+                @foreach (var reply in @Model.Replies)
+                {
+                    <tr>
+                        <td>
+                            @reply.Username
+                        </td>
+                        <td>
+                            @reply.Description
+                        </td>
+                    </tr>
+                    <p>
+                        <a asp-controller="Reply" asp-action="DeleteReply" asp-route-TopicId="@Model.TopicId" asp-route-ReplyId="@reply.Id">Delete</a>
+                    </p>
+                }
+
+            </tbody>
+          
+        </table>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <p>
+                <a asp-action="Create" asp-route-TopicId="@Model.TopicId">Create New Reply</a>
+            </p>
+        }

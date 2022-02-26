@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@using MiniForum.Models.Topics
+@model IEnumerable<TopicsViewModel>
+
+@{
+    ViewData["Title"] = "Topics";
+}
+
+<h1>Topics</h1>
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a asp-controller="Topics" asp-action="Create">Create New</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Owner
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+        }
+        else
+        {
+            foreach (var topic in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => topic.OwnerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => topic.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => topic.Description)
+            </td>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <td>
+                    <a asp-controller="Replies" asp-action="Replies" asp-route-topicId="@topic.Id">Reply</a>
+                </td>
+                <td>
+                    <a asp-controller="Topics" asp-action="Like" asp-route-topicId="@topic.Id">Like</a>
+                </td>
+                <td>
+                    <a asp-controller="Topics" asp-action="Dislike" asp-route-topicId="@topic.Id">Dislike</a>
+                </td>
+                <td>
+                    Likes: @topic.Likes
+                </td>
+          
+                <td>
+                    <a asp-controller="Topics" asp-action="DeleteTopic" asp-route-topicId="@topic.Id">Delete</a>
+                </td>
+            }
+        </tr>
+            }
+        }
+    </tbody>
+</table>
