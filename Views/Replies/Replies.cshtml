@@ -49,17 +49,17 @@
                 <h2>Replies</h2>
                 @foreach (var reply in @Model.Replies)
                 {
-                    <tr>
-                        <td>
-                            @reply.Username
-                        </td>
-                        <td>
-                            @reply.Description
-                        </td>
-                    </tr>
-                    <p>
-                        <a asp-controller="Reply" asp-action="DeleteReply" asp-route-TopicId="@Model.TopicId" asp-route-ReplyId="@reply.Id">Delete</a>
-                    </p>
+            <tr>
+                <td>
+                    @reply.Username
+                </td>
+                <td>
+                    @reply.Description
+                </td>
+                <td>
+                    <a type="button" class="btn btn-danger" asp-controller="Replies" asp-action="DeleteReply" asp-route-TopicId="@Model.TopicId" asp-route-ReplyId="@reply.Id">Delete</a>                   
+                </td>
+            </tr>
                 }
 
             </tbody>

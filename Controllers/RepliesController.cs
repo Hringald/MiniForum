@@ -62,7 +62,7 @@ namespace MiniForum.Controllers
             this.data.Replies.Add(reply);
             this.data.SaveChanges();
      
-           return this.Redirect("/Topics/Topics");
+           return this.Redirect($"/Replies/Replies?topicId={topicId}");
        }
 
         [HttpGet]
@@ -75,12 +75,11 @@ namespace MiniForum.Controllers
             {
                 this.data.Replies.Remove(reply);
                 this.data.SaveChanges();
-                return this.Redirect("/Topics/Topics");
             }
            
            
 
-            return this.Redirect("/Topics/Topics");
+            return this.Redirect($"/Replies/Replies?topicId={topicId}");
         }
     }
 }
