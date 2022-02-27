@@ -12,7 +12,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <p>
-        <a asp-controller="Topics" asp-action="Create">Create New</a>
+        <a button type="button" class="btn btn-primary" asp-controller="Topics" asp-action="Create">Create new Topic</a>
     </p>
 }
 <table class="table">
@@ -51,13 +51,13 @@
             @if (SignInManager.IsSignedIn(User))
             {
                 <td>
-                    <a asp-controller="Replies" asp-action="Replies" asp-route-topicId="@topic.Id">Reply</a>
+                    <a type="button" class="btn btn-primary" asp-controller="Replies" asp-action="Replies" asp-route-topicId="@topic.Id">Reply</a>
                 </td>
                 <td>
-                    <a asp-controller="Topics" asp-action="Like" asp-route-topicId="@topic.Id">Like</a>
+                    <a type="button" class="btn btn-success" asp-controller="Topics" asp-action="Like" asp-route-topicId="@topic.Id">Like</a>
                 </td>
                 <td>
-                    <a asp-controller="Topics" asp-action="Dislike" asp-route-topicId="@topic.Id">Dislike</a>
+                    <a type="button" class="btn btn-danger" asp-controller="Topics" asp-action="Dislike" asp-route-topicId="@topic.Id">Dislike</a>
                 </td>
                 <td>
                     Likes: @topic.Likes
