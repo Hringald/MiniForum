@@ -108,6 +108,14 @@ namespace MiniForum.Controllers
 
             if (topic.OwnerId == this.User.GetId())
             {
+                var topicReplies = this.data.Replies.Where(r=>r.TopicId==topicId);
+
+                foreach (var reply in topicReplies)
+                {
+                    this.data.Replies.Remove(reply);
+                }
+                this.data.SaveChanges();
+
                 this.data.Topics.Remove(topic);
                 this.data.SaveChanges();
 
