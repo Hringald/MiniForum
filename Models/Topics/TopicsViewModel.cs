@@ -9,5 +9,6 @@ namespace MiniForum.Models.Topics
         public string Description { get; set; }
         public string OwnerName { get; set; }
         public int Likes { get; set; }
+        public int RepliesCount { get; set; }
     }
 }

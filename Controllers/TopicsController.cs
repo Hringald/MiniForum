@@ -24,7 +24,8 @@ namespace MiniForum.Controllers
                     Name = t.Name,
                     Description = t.Description,
                     OwnerName = this.data.Users.FirstOrDefault(u => u.Id == t.OwnerId).UserName,
-                    Likes = t.Likes.Count()
+                    Likes = t.Likes.Count(),
+                    RepliesCount = t.Replies.Count()
                 }).ToList();
 
             return View(topicsViewModel);
